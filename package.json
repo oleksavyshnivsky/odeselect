@@ -1,0 +1,25 @@
+{
+  "name": "odeselect",
+  "version": "1.0.0",
+  "description": "Ajax loading of options to select from.",
+  "main": "dist/\u0016odeselect.min.js",
+  "directories": {
+    "test": "tests"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/oleksavyshnivsky/odeselect.git"
+  },
+  "keywords": [
+    "ajax"
+  ],
+  "author": "Oleksa Vyshnivsky",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/oleksavyshnivsky/odeselect/issues"
+  },
+  "homepage": "https://github.com/oleksavyshnivsky/odeselect#readme"
+}

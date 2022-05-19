@@ -1,0 +1,36 @@
+/**
+ * Assumptions:
+ * - Bootstrap variables are available
+ * - Dark theme is set as <html class="dark">
+*/
+
+/* Dropdown menu of options */
+.odeselect-menu {
+	position: absolute;
+	width: 300px;
+	background-color: white;
+	max-height: 50vh;
+	overflow: auto;
+	z-index: 100;
+}
+
+html.dark .odeselect-menu {
+	background-color: var(--bs-gray-dark);
+}
+
+/* "Option" button */
+.odeselect-menu button {
+	width: 100%;
+	text-align: left;
+}
+
+.odeselect-menu button:focus {
+	background-color: var(--bs-primary);
+	color: white;
+}
+
+/* "Cancel this selection" button */
+.odeselect-cancel {
+	right: 0;
+	top: 0;
+}
