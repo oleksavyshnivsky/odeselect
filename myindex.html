@@ -52,14 +52,14 @@
 	</div>
 	<div class="input-group">
 		<label class="input-group-text">Name Input extra</label>
-		<input type="text" data-target="name-extra" class="form-control">
+		<input type="text" data-target="name-extra" class="form-control" value="autocomplete=&quot;off&quot; maxlength=&quot;255&quot;">
 	</div>
 
 	<hr>
 
 	<div id="base" hidden>&lt;input type="hidden" id="editor-{{id-name}}" name="{{id-name}}" value="{{id-value}}" data-os-url="{{url}}" data-os-minlength="2" {{callback}}>
 &lt;input type="text" id="editor-{{name-name}}" name="{{name-name}}" value="{{name-value}}" placeholder="{{name-placeholder}}" {{name-extra}} class="form-control">
-&lt;script>docReady(() => document.getElementById('{{id-id}}').odeselect())&lt;/script></div>
+&lt;script>docReady(() => document.getElementById('editor-{{id-name}}').odeselect())&lt;/script></div>
 	<pre id="res" class="alert alert-secondary"></pre>
 	<div class="text-center">
 		<button id="copy" data-clipboard-target="#res" class="btn btn-primary">Copy</button>
@@ -71,10 +71,14 @@
 new ClipboardJS('#copy')
 
 const BASE = document.getElementById('base').innerText
+const idName = document.querySelector('[data-target="id-name"]')
+const nameName = document.querySelector('[data-target="name-name"]')
 function updateRes() {
+	if (!idName.value && nameName.value) idName.value = nameName.value + '_id'
 	var res = BASE
 	document.querySelectorAll('[data-target]').forEach(el => {
 		var re = new RegExp('{{'+el.dataset.target+'}}', 'g')
+		el.value = el.value.trim()
 		var value = (el.dataset.target === 'callback' && el.value) ? 'data-os-callback="'+el.value+'"' : el.value
 		res = res.replace(re, value)
 	})
