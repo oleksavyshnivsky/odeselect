@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Example</title>
+
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" integrity="sha256-hHKA3d/HttC8OW3Sl093W8DoZudhHJDj++kZYo6MLzA=" crossorigin="anonymous">
+	<link rel="stylesheet" type="text/css" href="dev/odeselect.css">
+
+	<style>
+		.input-group-text {
+			width: 13rem;
+		}
+	</style>
+</head>
+<body class="container my-3">
+	<!-- <div class="input-group">
+		<label class="input-group-text">Id Input id</label>
+		<input type="text" data-target="id-id" class="form-control" required>
+	</div> -->
+	<div class="input-group">
+		<label class="input-group-text">Id Input name</label>
+		<input type="text" data-target="id-name" class="form-control" required>
+	</div>
+	<div class="input-group">
+		<label class="input-group-text">Id Input value</label>
+		<input type="text" data-target="id-value" class="form-control" value="&lt;?=$item->id?>">
+	</div>
+	<div class="input-group">
+		<label class="input-group-text">URL</label>
+		<input type="text" data-target="url" class="form-control" required value="/ac/">
+	</div>
+	<div class="input-group">
+		<label class="input-group-text">Callback</label>
+		<input type="text" data-target="callback" class="form-control">
+	</div>
+	<!-- <div class="input-group">
+		<label class="input-group-text">Name Input id</label>
+		<input type="text" data-target="name-id" class="form-control" required>
+	</div> -->
+	<div class="input-group">
+		<label class="input-group-text">Name Input name</label>
+		<input type="text" data-target="name-name" class="form-control" required>
+	</div>
+	<div class="input-group">
+		<label class="input-group-text">Name Input value</label>
+		<input type="text" data-target="name-value" class="form-control"  value="&lt;?=$item->title?>">
+	</div>
+	<div class="input-group">
+		<label class="input-group-text">Name Input placeholder</label>
+		<input type="text" data-target="name-placeholder" class="form-control" value="<?=_('')?>">
+	</div>
+	<div class="input-group">
+		<label class="input-group-text">Name Input extra</label>
+		<input type="text" data-target="name-extra" class="form-control">
+	</div>
+
+	<hr>
+
+	<div id="base" hidden>&lt;input type="hidden" id="editor-{{id-name}}" name="{{id-name}}" value="{{id-value}}" data-os-url="{{url}}" data-os-minlength="2" {{callback}}>
+&lt;input type="text" id="editor-{{name-name}}" name="{{name-name}}" value="{{name-value}}" placeholder="{{name-placeholder}}" {{name-extra}} class="form-control">
+&lt;script>docReady(() => document.getElementById('{{id-id}}').odeselect())&lt;/script></div>
+	<pre id="res" class="alert alert-secondary"></pre>
+	<div class="text-center">
+		<button id="copy" data-clipboard-target="#res" class="btn btn-primary">Copy</button>
+	</div>
+
+
+<script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.10/dist/clipboard.min.js"></script>
+<script>
+new ClipboardJS('#copy')
+
+const BASE = document.getElementById('base').innerText
+function updateRes() {
+	var res = BASE
+	document.querySelectorAll('[data-target]').forEach(el => {
+		var re = new RegExp('{{'+el.dataset.target+'}}', 'g')
+		var value = (el.dataset.target === 'callback' && el.value) ? 'data-os-callback="'+el.value+'"' : el.value
+		res = res.replace(re, value)
+	})
+	document.getElementById('res').innerText = res
+}
+document.querySelectorAll('[data-target]').forEach(el => el.onchange = updateRes)
+</script>
+
+</body>
+</html>

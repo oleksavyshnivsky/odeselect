@@ -119,6 +119,9 @@ Node.prototype.odeselect = function() {
 									menu.innerHTML = ''
 									inputTitle.readOnly = true
 									btnClose.style.display = ''
+									var callback = inputId.dataset.osCallback
+									if (callback && typeof window[callback] === 'function')
+										window[callback]()
 								}
 								menu.insertBefore(el, null)
 							})
